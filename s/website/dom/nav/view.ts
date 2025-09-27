@@ -1,23 +1,23 @@
-import {html, shadowView} from "@benev/slate"
+import {html} from "lit"
+import {view, dom} from "@e280/sly"
 
 import styleCss from "./style.css.js"
 import themeCss from "../../../editor/theme.css.js"
 import arrowRightSvg from "../../../editor/dom/icons/gravity-ui/arrow-right.svg.js"
 
-export const Nav = shadowView(use => (elements: NodeListOf<HTMLElement>) => {
+export const Nav = view(use => (getSection: (id: string) => HTMLElement | undefined) => {
 	use.styles(themeCss, styleCss)
 
-	const scrollIntoElementView = (e: Event) => {
+	const scrollIntoElementView = async (e: Event) => {
 		const target = e.target as HTMLAnchorElement
-		drawer.value.hide()
+		getDrawer().hide()
 		const id = target.hash.slice(1)
-		elements.forEach(item => {
-			if(item.id === id) {
-				item.scrollIntoView({behavior: "smooth"})
-			} else if(id === "hero") {
-				window.scrollTo({top: 0, behavior: "smooth"})
-			}
-		})
+		const section = getSection(id)
+		if(section?.id === id) {
+			section.scrollIntoView({behavior: "smooth"})
+		} else if(id === "hero") {
+			window.scrollTo({top: 0, behavior: "smooth"})
+		}
 	}
 
 	const renderLinks = () => html`
@@ -34,12 +34,12 @@ export const Nav = shadowView(use => (elements: NodeListOf<HTMLElement>) => {
   		<sl-button class="drawer-primary" slot="footer" variant="primary">Close</sl-button>
 		</sl-drawer>`
 
-	const drawer = use.deferOnce(() => {
-		const drawer = use.shadow.querySelector("sl-drawer")! as any
- 		const closeButton = drawer.querySelector('sl-button[variant="primary"]')
- 		closeButton?.addEventListener("click", () => drawer.hide())
-		return drawer
-	})
+	function getDrawer() {
+		const drawer = dom(use.shadow).require("sl-drawer") as any
+		const closeBtn = dom(drawer).require('sl-button[variant="primary"]')
+ 		closeBtn?.addEventListener("click", () => drawer.hide())
+ 		return drawer
+	}
 
 	return html`
 		${mobileDrawer()}
@@ -52,7 +52,7 @@ export const Nav = shadowView(use => (elements: NodeListOf<HTMLElement>) => {
 			</div>
 			<div class="right">
 				<a class="try" href="#/editor">Open Editor ${arrowRightSvg}</a>
-				<img class="menu-icon mobile-only" src="/assets/hamburger.svg" @click=${() => (drawer.value as any).show()}>
+				<img class="menu-icon mobile-only" src="/assets/hamburger.svg" @click=${async () => getDrawer().show()}>
 			</div>
 		</nav>
 	`

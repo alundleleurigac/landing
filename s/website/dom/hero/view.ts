@@ -1,13 +1,14 @@
-import {html, shadowView} from "@benev/slate"
+import {html} from "lit"
+import {view} from "@e280/sly"
 
 import styleCss from "./style.css.js"
 import themeCss from "../../../editor/theme.css.js"
 
-export const Hero = shadowView(use => () => {
+export const Hero = view(use => () => {
 	use.styles(themeCss, styleCss)
 
 	return html`
-		<section class="hero">
+		<section class="hero" id="hero">
 			<div class="hero-background"></div>
 
 			<div class="hero-content">

@@ -1,4 +1,6 @@
-import {html, shadowView, repeat} from "@benev/slate"
+import {html} from "lit"
+import {view} from "@e280/sly"
+import {repeat} from "lit/directives/repeat.js"
 
 import styleCss from "./style.css.js"
 import themeCss from "../../../editor/theme.css.js"
@@ -126,7 +128,7 @@ const features = [
   }
 ]
 
-export const Features = shadowView(use => () => {
+export const Features = view(use => () => {
   use.styles(themeCss, styleCss)
   use.mount(() => {
     const animations = ['fade-in-down','slide-in-up','bounce-in','zoom-in','tada','blur-in','pulse']

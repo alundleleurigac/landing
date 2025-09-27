@@ -1,8 +1,10 @@
-import {html, shadowView} from "@benev/slate"
+import {html} from "lit"
+import {view} from "@e280/sly"
+
 import styleCss from "./style.css.js"
 import themeCss from "../../../editor/theme.css.js"
 
-export const Developers = shadowView(use => () => {
+export const Developers = view(use => () => {
   use.styles(themeCss, styleCss)
 
   return html`

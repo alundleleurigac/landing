@@ -1,4 +1,5 @@
-import {css, html, shadowComponent} from "@benev/slate"
+import {html, css} from "lit"
+import {dom, view} from "@e280/sly"
 
 import {Nav} from "./dom/nav/view.js"
 import {Hero} from "./dom/hero/view.js"
@@ -8,28 +9,33 @@ import {Ecosystem} from "./dom/ecosystem/view.js"
 import {Developers} from "./dom/developers/view.js"
 import {OpenSource} from "./dom/open-source/view.js"
 
-export const landingPage = shadowComponent(use => {
+export const landingPage = view.component(use => {
 	use.styles(css`:host {
 		background: #141110;
 		width: 100%;
 	}`)
 
-	const sections = use.deferOnce(() => use.shadow.querySelectorAll("section"))
+   function getNavSection(id: string) {
+   	try {
+    	return dom(use.shadow).require(`[id="${id}"]`)
+   	}
+   	catch(e) {}
+  }
 
 	return html`
-		${Nav([sections.value!])}
-		${Hero([])}
+		${Nav(getNavSection)}
+		${Hero()}
     <section id="features">
-			${Features([])}
+			${Features()}
     </section>
     <section id="open-source">
-			${OpenSource([])}
+			${OpenSource()}
     </section>
 		<section id="ecosystem" class="ecosystem">
-			${Ecosystem([])}
+			${Ecosystem()}
 		</section>
     <section class="developers" id="developers">
-			${Developers([])}
+			${Developers()}
     </section>
 		${Footer([])}
 	`

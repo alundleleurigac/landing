@@ -1,6 +1,6 @@
-import {register} from "@benev/slate"
+import {dom} from "@e280/sly"
 import {landingPage} from "./website/index.js"
 
 console.log("🌀 Omniclip")
 
-register({landingPage})
+dom.register({landingPage})
