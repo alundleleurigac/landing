@@ -6,7 +6,7 @@ import styleCss from "./style.css.js"
 import themeCss from "../../../theme.css.js"
 import {EditorContext} from "../../../context/context.js"
 
-export const getOmniMedia = (context: EditorContext) => view.component(use => {
+export const mkOmniMedia = (context: EditorContext) => view.component(use => {
 	use.styles(themeCss, styleCss)
 	const {Lol} = context.views
 

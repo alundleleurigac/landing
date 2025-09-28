@@ -11,7 +11,7 @@ import {UnknownPage} from "../pages/unknown/view.js"
 import {AccountPage} from "../pages/account/view.js"
 import {CargoController} from "./controllers/cargo.js"
 import {ProjectsPage} from "../pages/projects/view.js"
-import {getOmniMedia} from "../dom/components/omni-media/element.js"
+import {mkOmniMedia} from "../dom/components/omni-media/element.js"
 
 export class EditorContext {
 	static async setup() {
@@ -44,7 +44,7 @@ export class EditorContext {
 	}
 
 	getElements = () => ({
-		OmniMedia: getOmniMedia(this),
+		OmniMedia: mkOmniMedia(this),
 	})
 }
 
