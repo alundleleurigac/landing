@@ -22,7 +22,7 @@
 		"_ln-assets": "ln -s \"$(realpath assets)\" x/assets"
 	},
 	"author": "zenkyuv",
-	"license": "ISC",
+	"license": "MIT",
 	"devDependencies": {
 		"@e280/science": "^0.0.5",
 		"@e280/scute": "^0.0.0-4",
