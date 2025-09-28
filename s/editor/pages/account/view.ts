@@ -2,10 +2,10 @@ import {html} from "lit"
 import {view} from "@e280/sly"
 
 import styleCss from "./style.css.js"
-import themeCss from "../../../theme.css.js"
-import {EditorContext} from "../../../context/context.js"
+import themeCss from "../../theme.css.js"
+import {EditorContext} from "../../context/context.js"
 
-export const AccountView = view(use => (context: EditorContext) => {
+export const AccountPage = view(use => (context: EditorContext) => {
 	use.name("account")
 	use.styles(themeCss, styleCss)
 

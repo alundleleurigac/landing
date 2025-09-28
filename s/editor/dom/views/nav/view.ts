@@ -5,7 +5,7 @@ import styleCss from "./style.css.js"
 import themeCss from "../../../theme.css.js"
 import {EditorContext} from "../../../context/context.js"
 
-export const NavView = view(use => (context: EditorContext) => {
+export const Nav = view(use => (context: EditorContext) => {
 	const {router} = context
 	use.styles(themeCss, styleCss)
 
@@ -18,3 +18,4 @@ export const NavView = view(use => (context: EditorContext) => {
 		</div>
 	`
 })
+

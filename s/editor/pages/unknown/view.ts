@@ -2,9 +2,9 @@ import {html} from "lit"
 import {view} from "@e280/sly"
 
 import styleCss from "./style.css.js"
-import themeCss from "../../../theme.css.js"
+import themeCss from "../../theme.css.js"
 
-export const UnknownView = view(use => () => {
+export const UnknownPage = view(use => () => {
 	use.name("unknown")
 	use.styles(themeCss, styleCss)
 

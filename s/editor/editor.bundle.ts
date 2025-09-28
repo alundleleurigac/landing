@@ -22,7 +22,7 @@ class OmniEditor extends view.component(use => {
 
 
 	return html`
-		${context.views.Nav}
+		${context.views.Nav()}
 		<main>
 			${context.router.render()}
 		</main>

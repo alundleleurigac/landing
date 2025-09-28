@@ -8,11 +8,11 @@ import {EditorContext} from "../../../context/context.js"
 
 export const getOmniMedia = (context: EditorContext) => view.component(use => {
 	use.styles(themeCss, styleCss)
-	const {LolView} = context.views
+	const {Lol} = context.views
 
 	return html`
 		<p>omni media</p>
-		${LolView()}
+		${Lol()}
 	`
 })
 

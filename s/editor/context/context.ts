@@ -1,15 +1,16 @@
 
-import {spa} from "@e280/sly"
+import {DropFirst, ob} from "@e280/stz"
+import {spa, View, ViewProps} from "@e280/sly"
 import {Cellar, OpfsForklift} from "@e280/quay"
 
 import {Strata} from "./strata.js"
-import {NavView} from "../dom/views/nav/view.js"
-import {getLolView} from "../dom/views/lol/view.js"
-import {AboutView} from "../dom/views/about/view.js"
+import {Lol} from "../dom/views/lol/view.js"
+import {Nav} from "../dom/views/nav/view.js"
+import {AboutPage} from "../pages/about/view.js"
 import {CargoController} from "./controllers/cargo.js"
-import {UnknownView} from "../dom/views/unknown/view.js"
-import {AccountView} from "../dom/views/account/view.js"
-import {ProjectsView} from "../dom/views/projects/view.js"
+import {UnknownPage} from "../pages/unknown/view.js"
+import {AccountPage} from "../pages/account/view.js"
+import {ProjectsPage} from "../pages/projects/view.js"
 import {getOmniMedia} from "../dom/components/omni-media/element.js"
 
 export class EditorContext {
@@ -30,21 +31,19 @@ export class EditorContext {
 
 	router = new spa.Router({
 		routes: {
-			home: spa.route("#/", async() => AboutView(this)),
-			account: spa.route("#/account", async() => AccountView(this)),
-			projects: spa.route("#/projects", async() => ProjectsView(this)),
+			home: spa.route("#/", async() => AboutPage(this)),
+			account: spa.route("#/account", async() => AccountPage(this)),
+			projects: spa.route("#/projects", async() => ProjectsPage(this)),
 		},
-		notFound: async() => UnknownView(),
+		notFound: async() => UnknownPage(),
 	})
 
-
-	views = {
-		Nav: NavView(this),
-		About: AboutView(this),
-		Account: AccountView(this),
-		LolView: getLolView(this),
-		Project: ProjectsView(this)
-	}
+	views = (() => {
+		const views = {Nav, Lol}
+		return ob(views).map(v => v.transmute((...p: any[]) => [this, ...p] as any)) as {
+			[K in keyof typeof views]: View<DropFirst<ViewProps<(typeof views)[K]>>>
+		}
+	})()
 
 	getElements = () => ({
 		OmniMedia: getOmniMedia(this),
