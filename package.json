@@ -24,8 +24,8 @@
 	"author": "zenkyuv",
 	"license": "MIT",
 	"devDependencies": {
-		"@e280/science": "^0.0.5",
-		"@e280/scute": "^0.0.0-4",
+		"@e280/science": "^0.1.2",
+		"@e280/scute": "^0.1.0",
 		"@rollup/plugin-node-resolve": "^16.0.1",
 		"@types/chai": "^5.2.2",
 		"@types/dom-webcodecs": "^0.1.15",
@@ -45,7 +45,7 @@
 	"dependencies": {
 		"@e280/quay": "^0.0.0-2",
 		"@e280/sly": "^0.2.0-21",
-		"@e280/strata": "^0.0.0-8",
+		"@e280/strata": "^0.2.0-14",
 		"@e280/stz": "^0.2.6",
 		"@ffmpeg/ffmpeg": "^0.12.15",
 		"@ffmpeg/util": "^0.12.2",
