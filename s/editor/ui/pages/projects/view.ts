@@ -10,7 +10,9 @@ export const ProjectsPage = (context: EditorContext) => view(use => () => {
 	use.styles(themeCss, styleCss)
 
 	return html`
-		<div class=plate>
+		<header theme=topper></header>
+
+		<div theme=mid>
 			<h1>Projects</h1>
 			<p>The project browser will be here.</p>
 		<div>

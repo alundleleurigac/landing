@@ -13,11 +13,15 @@ export const AboutPage = (context: EditorContext) => view(use => () => {
 	const version = use.once(() => getMetaVersion())
 
 	return html`
-		<div class=plate>
+		<header theme=topper></header>
+
+		<section theme=mid>
 			<img alt="" src="/assets/logo/omni.avif"/>
-			<h2><span>Omniclip</span> <span>v${version}</span></h2>
-			<p>a new horizon</p>
-		<div>
+			<h2>
+				<strong>Omniclip</strong>
+				<small>v${version}</small>
+			</h2>
+		<section>
 	`
 })
 

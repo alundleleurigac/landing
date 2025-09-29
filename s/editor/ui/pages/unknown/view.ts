@@ -10,7 +10,11 @@ export const UnknownPage = (context: EditorContext) => view(use => () => {
 	use.styles(themeCss, styleCss)
 
 	return html`
-		<h1>unknown</h1>
+		<header theme=topper></header>
+
+		<div theme=mid>
+			<h1>unknown</h1>
+		</div>
 	`
 })
 

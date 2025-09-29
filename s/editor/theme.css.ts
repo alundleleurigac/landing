@@ -31,5 +31,27 @@ a {
 	}
 }
 
+[theme="topper"] {
+	height: 3em;
+	width: 100%;
+	background: #fff1;
+}
+
+[theme="paddy"] {
+	padding: 1em;
+}
+
+[theme="mid"] {
+	flex: 1 1 auto;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	gap: 0.5em;
+	padding: 1em;
+}
+
 }`
 

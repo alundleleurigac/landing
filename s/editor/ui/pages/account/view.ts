@@ -10,7 +10,9 @@ export const AccountPage = (context: EditorContext) => view(use => () => {
 	use.styles(themeCss, styleCss)
 
 	return html`
-		<div class=plate>
+		<header theme=topper></header>
+
+		<div theme=mid>
 			<h1>Account</h1>
 			<p>User account settings will be here.</p>
 		<div>
