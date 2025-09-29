@@ -1,9 +1,9 @@
+
 import {css, html} from "lit"
 import {view} from "@e280/sly"
-
 import {EditorContext} from "../../context/context.js"
 
-export const ProjectPage = view(use => (context: EditorContext, projectId: string) => {
+export const ProjectPage = (context: EditorContext) => view(use => (projectId: string) => {
 	use.styles(css`
 		:host {
 			display: flex;
@@ -17,7 +17,9 @@ export const ProjectPage = view(use => (context: EditorContext, projectId: strin
 		}
 	`)
 
-	const App = context.views.EditorApp(projectId)
-
-	return html`<div class="app">${App}</div>`
+	// // TODO
+	// const App = context.views2.EditorApp(projectId)
+	//
+	// return html`<div class="app">${App}</div>`
 })
+

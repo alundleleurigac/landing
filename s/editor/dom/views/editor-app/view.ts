@@ -1,3 +1,4 @@
+
 import {html, css} from 'lit'
 import {view} from '@e280/sly'
 
@@ -5,7 +6,7 @@ import {TimelineTab} from '../../tabs/timeline/view.js'
 import {OutlinerTab} from '../../tabs/outliner/view.js'
 import {EditorContext} from '../../../context/context.js'
 
-export const EditorApp = view(use => (context: EditorContext, projectId: string) => {
+export const EditorApp = (context: EditorContext) => view(use => (projectId: string) => {
 	use.styles(css`
 		:host {
 			display: flex;
@@ -39,3 +40,4 @@ export const EditorApp = view(use => (context: EditorContext, projectId: string)
 		</div>
 	`
 })
+

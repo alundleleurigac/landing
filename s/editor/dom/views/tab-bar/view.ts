@@ -1,10 +1,11 @@
+
 import {html, css} from "lit"
 import {view} from "@e280/sly"
-
 import {repeat} from "lit/directives/repeat.js"
+
 import {EditorContext} from "../../../context/context.js"
 
-export const TabBar = view(use => (context: EditorContext) => {
+export const TabBar = (context: EditorContext) => view(use => () => {
 	const manager = context.tabs
 	use.styles(css`
 		nav {

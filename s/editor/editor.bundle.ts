@@ -20,13 +20,13 @@ class OmniRouter extends view.component(use => {
 		}
 	`)
 
-
-	return html`
-		${context.views.Nav()}
-		<main>
-			${context.router.render()}
-		</main>
-	`
+	// // TODO
+	// return html`
+	// 	${context.views.Nav()}
+	// 	<main>
+	// 		${context.router.render()}
+	// 	</main>
+	// `
 }) {}
 
 dom.register({...context.getElements(), OmniRouter})

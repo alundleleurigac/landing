@@ -1,6 +1,6 @@
 
 import {Cellar} from "@e280/quay"
-import {Strata} from "../strata.js"
+import {Strata} from "../parts/strata.js"
 
 export class CargoController {
 	constructor(public strata: Strata, public cellar: Cellar) {}

@@ -6,7 +6,7 @@ import styleCss from "./style.css.js"
 import themeCss from "../../../theme.css.js"
 import {EditorContext} from "../../../context/context.js"
 
-export const Lol = view(use => (_context: EditorContext) => {
+export const Lol = (context: EditorContext) => view(use => () => {
 	use.styles(themeCss, styleCss)
 	return html`lol`
 })
