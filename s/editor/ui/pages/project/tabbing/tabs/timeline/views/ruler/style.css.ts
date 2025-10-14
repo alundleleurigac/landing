@@ -15,7 +15,7 @@ export default css`@layer view {
 	background: #1f1f1f;
 	border-bottom: 1px solid #2a2a2a;
 	cursor: ew-resize;
-	min-width: 100%;
+	width: 100vw;
 }
 
 .marker {
