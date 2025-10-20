@@ -90,9 +90,8 @@ export const Ruler = view(use => (context: EditorContext) => {
 		const rulerRect = (await ruler)!.getBoundingClientRect()
 		const x = event.clientX - rulerRect.left
 		const timeInMs = x / (PIXELS_PER_MILLISECOND * zoom)
-		const timeInSeconds = timeInMs / 1000
-		throttledSeek(timeInSeconds >= 0 ? timeInSeconds : 0)
-		player.currentTime.value =  timeInSeconds >= 0 ? timeInSeconds : 0
+		throttledSeek(timeInMs >= 0 ? timeInMs : 0)
+		player.currentTime.value = timeInMs >= 0 ? timeInMs : 0
 	}
 
 	const handlePointerMove = seek
