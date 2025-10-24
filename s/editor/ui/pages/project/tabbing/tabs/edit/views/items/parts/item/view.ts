@@ -11,7 +11,7 @@ import {EditorContext} from "../../../../../../../../../../context/context.js"
 
 export const TimelineItem = view(use => (
 	context: EditorContext,
-	item: Item.Video | Item.Text,
+	item: Item.Video | Item.Text | Item.Audio,
 	content: TemplateResult | DirectiveResult,
 	ancestors: Item.Any[]
 ) => {

@@ -1,0 +1,70 @@
+import {html} from "lit"
+import {view} from "@e280/sly"
+import {Item} from "@omnimedia/omnitool"
+
+import styleCss from "./style.css.js"
+import {EditorContext} from "../../../../../../../../../context/context.js"
+
+const BLEND_MODES = [
+	"Normal", "Multiply", "Screen", "Overlay", "Darken", "Lighten",
+	"ColorDodge", "ColorBurn", "HardLight", "SoftLight", "Difference",
+	"Exclusion", "Hue", "Saturation", "Color", "Luminosity"
+]
+
+export const CompositingControls = view(use => (context: EditorContext, item: Item.Video | Item.Text) => {
+	use.styles(styleCss)
+	const timeline = context.strata.timeline.state.timeline.items
+
+	const spatialItem = "spatialId" in item && item.spatialId !== undefined
+		? timeline.find(i => i.id === item.spatialId) as Item.Spatial
+		: null
+
+	const opacity = 1
+	const blendMode = "Normal"
+
+	const handleOpacityChange = (value: number) => {
+	}
+
+	const handleBlendModeChange = (value: string) => {
+	}
+
+	return html`
+		<div class="compositing-controls">
+			<div class="control-row">
+				<label for="blend-mode">Blend Mode</label>
+				<select
+					id="blend-mode"
+					.value=${blendMode}
+					@change=${(e: Event) => handleBlendModeChange((e.target as HTMLSelectElement).value)}
+				>
+					${BLEND_MODES.map(mode => html`<option .value=${mode}>${mode}</option>`)}
+				</select>
+			</div>
+			<div class="control-row">
+				<label for="opacity">Opacity</label>
+				<div class="inputs">
+					<input
+						id="opacity"
+						type="range"
+						min="0"
+						max="1"
+						step="0.01"
+						.value=${opacity.toString()}
+						@input=${(e: InputEvent) => handleOpacityChange(Number((e.target as HTMLInputElement).value))}
+					>
+					<div class="input-group">
+						<input
+							type="number"
+							min="0"
+							max="100"
+							step="1"
+							.value=${Math.round(opacity * 100).toString()}
+							@input=${(e: InputEvent) => handleOpacityChange(Number((e.target as HTMLInputElement).value) / 100)}
+						>
+						<span class="suffix">%</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	`
+})

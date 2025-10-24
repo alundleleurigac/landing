@@ -1,7 +1,7 @@
 
 import {signal} from "@e280/strata"
 
-export type TabKind = "outliner" | "timeline"
+export type TabKind = "outliner" | "export" | "edit" | "inspector"
 
 export type Tab = {
 	id: TabKind
@@ -9,8 +9,10 @@ export type Tab = {
 
 export class TabManager {
 	tabs = signal<Tab[]>([
-		{id: "timeline"},
 		{id: "outliner"},
+		{id: "export"},
+		{id: "edit"},
+		{id: "inspector"}
 	])
 
 	activeTabId = signal(this.tabs.value[0].id)
