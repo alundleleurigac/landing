@@ -17,7 +17,10 @@ export const ProjectPage = (context: EditorContext) => view(use => (projectId: s
 	use.mount(() => () => context.dispose())
 
 	const manager = use.once(() => new TabManager())
-	const isEditActive = manager.activeTabId.value === "edit"
+	const isEditTabActive = manager.activeTabId.value === "edit"
+	const isOutlinerTabActive = manager.activeTabId.value === "outliner"
+	const isInspectorTabActive = manager.activeTabId.value === "inspector"
+	const isExportTabActive = manager.activeTabId.value === "export"
 
 	return html`
 		<div class="project-page">
@@ -32,35 +35,35 @@ export const ProjectPage = (context: EditorContext) => view(use => (projectId: s
 			<div class="layout-grid">
 				<div
 					class="panel outliner-panel"
-					?data-active=${manager.activeTabId.value === "outliner"}
+					?data-active=${isOutlinerTabActive}
 				>
 					${OutlinerTab(context)}
 				</div>
 
 				<div
 					class="panel viewport-panel"
-					?data-active=${isEditActive}
+					?data-active=${isEditTabActive}
 				>
 					${TimelineViewport(context)}
 				</div>
 
 				<div
 					class="panel inspector-panel"
-					?data-active=${manager.activeTabId.value === "inspector"}
+					?data-active=${isInspectorTabActive}
 				>
 					${InspectorTab(context)}
 				</div>
 
 				<div
 					class="panel timeline-panel"
-					?data-active=${isEditActive}
+					?data-active=${isEditTabActive}
 				>
 					${EditTab(context)}
 				</div>
 
 				<div
 					class="panel export-panel"
-					?data-active=${manager.activeTabId.value === "export"}
+					?data-active=${isExportTabActive}
 				>
 					${ExportTab(context)}
 				</div>
