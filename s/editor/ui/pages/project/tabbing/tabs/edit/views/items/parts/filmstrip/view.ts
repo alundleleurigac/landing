@@ -1,6 +1,5 @@
 import {html} from "lit"
 import {view} from "@e280/sly"
-import {debounce} from "@e280/stz"
 import {Filmstrip, Item} from "@omnimedia/omnitool"
 
 import styleCss from "./style.css.js"
@@ -26,10 +25,30 @@ export const FilmstripView = view(use => (
 		return Math.max(0.05, THUMB_WIDTH_PX / (pixelsPerMillisecond * 1000))
 	}
 
+	function cloneCanvas(source: HTMLCanvasElement | OffscreenCanvas) {
+		const clone = document.createElement('canvas')
+		clone.width = source.width
+		clone.height = source.height
+		const ctx = clone.getContext('2d')
+		if (ctx) ctx.drawImage(source as HTMLCanvasElement, 0, 0)
+		return clone
+	}
+
 	const op = use.op.promise<Filmstrip>(
 		Filmstrip.init("/assets/temp/gl.mp4", {
-			onChange: tiles =>
-				thumbnails(tiles.map(({canvas, time}) => ({canvas: canvas.canvas, time}))),
+			frequency: 1,
+			onPlaceholders: times => {
+				thumbnails(times.map(time => {
+					const closest = thumbnails().reduce((a, b) =>
+						Math.abs(b.time - time) < Math.abs(a.time - time) ? b : a,
+					)
+					return {
+						time,
+						canvas: cloneCanvas(closest.canvas)
+					}
+				}))
+			},
+			onChange: async tiles => thumbnails(tiles.map(({canvas, time}) => ({canvas: canvas.canvas, time}))),
 			canvasSinkOptions: {width: THUMB_WIDTH_PX, height: 72, fit: "contain"},
 		})
 	)
@@ -50,11 +69,10 @@ export const FilmstripView = view(use => (
 	}
 
 	use.once(async () => update(0))
-	const throttledUpdate = use.once(() => debounce(50, left => update(left)))
 
 	use.mount(() => {
 		const dispose1 = settings.on(async ({zoom}) => (await filmstrip).frequency = getFrequencyInSec(zoom))
-		const dispose2 = ui.on(async ({timelineScrollLeft}) => throttledUpdate(timelineScrollLeft))
+		const dispose2 = ui.on(async ({timelineScrollLeft}) => update(timelineScrollLeft))
 		return () => {
 			dispose1()
 			dispose2()
