@@ -22,7 +22,8 @@ export const FilmstripView = view(use => (
 
 	const getFrequencyInSec = (zoom: number) => {
 		const pixelsPerMillisecond = 0.1 * zoom
-		return Math.max(0.05, THUMB_WIDTH_PX / (pixelsPerMillisecond * 1000))
+		const freq = THUMB_WIDTH_PX / (pixelsPerMillisecond * 1000)
+		return Math.round(freq * 1000) / 1000
 	}
 
 	function cloneCanvas(source: HTMLCanvasElement | OffscreenCanvas) {
@@ -49,7 +50,7 @@ export const FilmstripView = view(use => (
 				}))
 			},
 			onChange: async tiles => thumbnails(tiles.map(({canvas, time}) => ({canvas: canvas.canvas, time}))),
-			canvasSinkOptions: {width: THUMB_WIDTH_PX, height: 72, fit: "contain"},
+			canvasSinkOptions: {width: THUMB_WIDTH_PX, height: 50, fit: "contain"},
 		})
 	)
 
@@ -85,7 +86,7 @@ export const FilmstripView = view(use => (
 				<div
 					class="thumbnail"
 					style="
-						left: ${time * 1000 * pixelsPerMillisecond}px;
+						left:  ${Math.round((time * 1000 * pixelsPerMillisecond) / THUMB_WIDTH_PX) * THUMB_WIDTH_PX}px;
 						width: ${THUMB_WIDTH_PX}px;
 					"
 				>
