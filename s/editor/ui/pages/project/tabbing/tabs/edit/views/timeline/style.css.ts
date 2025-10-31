@@ -11,7 +11,7 @@ export default css`@layer view {
 
 .timeline-grid {
 	display: grid;
-	grid-template-columns: 200px 1fr;
+	grid-template-columns: 1fr;
 	grid-template-rows: auto 1fr;
 	flex: 1;
 	overflow: auto;
