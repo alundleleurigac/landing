@@ -1,6 +1,11 @@
 import {css} from "lit"
 
 export default css`
+:host {
+	display: flex;
+	height: 45px;
+}
+
 .filmstrip-container {
 	position: relative;
 	width: 100%;

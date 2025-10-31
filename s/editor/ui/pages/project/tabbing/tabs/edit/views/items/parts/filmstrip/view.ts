@@ -50,7 +50,7 @@ export const FilmstripView = view(use => (
 				}))
 			},
 			onChange: async tiles => thumbnails(tiles.map(({canvas, time}) => ({canvas: canvas.canvas, time}))),
-			canvasSinkOptions: {width: THUMB_WIDTH_PX, height: 50, fit: "contain"},
+			canvasSinkOptions: {width: THUMB_WIDTH_PX, height: 50, fit: "cover"},
 		})
 	)
 
