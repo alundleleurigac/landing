@@ -67,7 +67,7 @@ export default css`@layer view {
 		grid-template-columns: 300px 1fr 300px;
 		grid-template-rows: 1fr 1fr;
 		grid-template-areas:
-			"outliner viewport inspector"
+			"mediabin viewport inspector"
 			"outliner timeline inspector";
 		overflow: hidden;
 	}
