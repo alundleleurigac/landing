@@ -1,6 +1,7 @@
 import {GoldElement, html} from "@benev/slate"
 
 import {styles} from "./styles.js"
+import { SpeedControl } from "./speed-control.js"
 import {Tooltip} from "../../../../views/tooltip/view.js"
 import {shadow_view} from "../../../../context/context.js"
 import binSvg from "../../../../icons/gravity-ui/bin.svg.js"
@@ -94,6 +95,7 @@ export const Toolbar = shadow_view(use => (timeline: GoldElement) => {
 							</button>`,
 						html`<span>Clear Timeline</span>`
 					)}
+				${SpeedControl(use.context.state.selected_effect as any, actions)}
 				</div>
 				<div class=time>${convert_ms_to_hmsms(use.context.state.timecode)}</div>
 				<div class="zoom">

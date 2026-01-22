@@ -333,7 +333,18 @@ export const historical = actionize_historical({
 		const helper = new Helpers(state)
 		const effect = helper.get_effect(id)
 		effect!.duration = duration
-		effect!.end = effect!.start + duration
+		const speed = (effect as VideoEffect).speed || 1
+		effect!.end = effect!.start + (duration * speed)
+	},
+	set_effect_speed: state => ({id}: AnyEffect, speed: number) => {
+		const helper = new Helpers(state)
+		const effect = helper.get_effect(id) as VideoEffect
+		const valid_speed = speed <= 0 ? 1 : speed
+		effect.speed = valid_speed
+		const source_duration = effect.end - effect.start
+		// Recalculate duration based on new speed
+		// If previous speed was 1 (default), effectively source_duration / 1
+		effect.duration = source_duration / valid_speed
 	},
 	set_effect_start_position: state => ({id}: AnyEffect, x: number) => {
 		const helper = new Helpers(state)

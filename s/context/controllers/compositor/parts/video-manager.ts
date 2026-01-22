@@ -159,6 +159,7 @@ export class VideoManager extends Map<string, {sprite: PIXI.Sprite, transformer:
 					const element = video.texture.baseTexture.resource.source as HTMLVideoElement
 					const isMuted = isEffectMuted(effect)
 					element.muted = isMuted
+					element.playbackRate = effect.speed || 1
 					await element.play()
 				}
 			}
@@ -177,6 +178,7 @@ export class VideoManager extends Map<string, {sprite: PIXI.Sprite, transformer:
 		const video = this.get(effect.id)?.sprite
 		if(video) {
 			const element = video.texture.baseTexture.resource.source as HTMLVideoElement
+			element.playbackRate = effect.speed || 1
 			await element.play()
 		}
 	}

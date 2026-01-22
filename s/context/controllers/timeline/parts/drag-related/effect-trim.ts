@@ -26,12 +26,15 @@ export class effectTrimHandler {
 		if(!this.grabbed) {return}
 		const effect = state.effects.find(({id}) => id === this.effect?.id)!
 		const pointer_position = this.#get_pointer_position_relative_to_effect_right_or_left_side(clientX, state)
+		const speed = (this.effect as any).speed ?? 1
+
 		if(this.side === "left") {
 			const start_at = this.initial_start_position + pointer_position
-			const start = this.initial_start + pointer_position
-			if(start <= effect!.end - 1000/state.timebase) {
+			const start = this.initial_start + (pointer_position * speed)
+
+			if(start <= effect!.end - (1000/state.timebase * speed)) {
 				if(this.effect!.kind === "video" || this.effect!.kind === "audio") {
-					if(start >= 1000/state.timebase) {
+					if(start >= 0) { // Start cannot be less than 0
 						this.#start_at = start_at
 						this.#start = start
 						this.onDragOver.publish({start_at_position: start_at, start, end: effect!.end, effectId: this.effect!.id})
@@ -43,10 +46,11 @@ export class effectTrimHandler {
 				}
 			}
 		} else {
-			const end = this.initial_end + pointer_position
-			if(end >= effect!.start + 1000/state.timebase) {
+			const end = this.initial_end + (pointer_position * speed)
+			if(end >= effect!.start + (1000 / state.timebase * speed)) {
 				if(this.effect!.kind === "video" || this.effect!.kind === "audio") {
-					if(end <= this.effect!.duration) {
+					const max_duration = (this.effect as any).raw_duration ?? Infinity
+					if(end <= max_duration) {
 						this.#end = end
 						this.onDragOver.publish({end, start_at_position: effect!.start_at_position, start: effect!.start, effectId: this.effect!.id})
 					}

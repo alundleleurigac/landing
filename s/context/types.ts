@@ -67,6 +67,7 @@ export interface VideoEffect extends Effect {
 	rect: EffectRect
 	file_hash: string
 	name: string
+	speed?: number
 }
 
 export interface AudioEffect extends Effect {

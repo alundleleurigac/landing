@@ -162,7 +162,8 @@ export class Compositor {
 	}
 
 	get_effect_current_time_relative_to_timecode(effect: AnyEffect, timecode: number) {
-		const current_time = timecode - effect.start_at_position + effect.start
+		const speed = (effect as VideoEffect).speed || 1
+		const current_time = (timecode - effect.start_at_position) * speed + effect.start
 		return current_time / 1000
 	}
 
@@ -170,7 +171,8 @@ export class Compositor {
 		return effects.filter(effect => {
 			const transition = this.managers.transitionManager.getTransitionByEffect(effect)
 			const {incoming, outgoing} = this.managers.transitionManager.getTransitionDurationPerEffect(transition, effect)
-			return effect.start_at_position - incoming <= timecode && timecode <= effect.start_at_position + (effect.end - effect.start) + outgoing
+			const duration = "duration" in effect ? effect.duration : (effect.end - effect.start)
+			return effect.start_at_position - incoming <= timecode && timecode <= effect.start_at_position + duration + outgoing
 		})
 	}
 
