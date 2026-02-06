@@ -47,16 +47,22 @@ export class HashRouter {
 	}
 
 	onHashChange() {
-		const currentPath = this.getCurrentPath()
-		const matchedRoute = this.matchRoute(currentPath)
+	const currentPath = this.getCurrentPath()
+	const matchedRoute = this.matchRoute(currentPath)
 
-		if (matchedRoute) {
-			const { handler, params } = matchedRoute
-			this.render(handler, ...params)
-		} else if (currentPath.startsWith("editor")) {
-	window.location.href = "https://YOUR-EXTERNAL-LINK.com"
-	return
+	if (matchedRoute) {
+		const { handler, params } = matchedRoute
+		this.render(handler, ...params)
+
+	} else if (currentPath.startsWith("editor")) {
+		window.location.href = "https://YOUR-EXTERNAL-LINK.com"
+		return
+
+	} else {
+		this.render(this.routes["/"]) // Landing page only
+	}
 }
+
  else {
 			this.render(this.routes["/"]) // Default to landing page
 		}
