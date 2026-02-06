@@ -25,9 +25,9 @@ export default template(async basic => {
       <!-- main entry -->
       <script type="module" src="./main.ts"></script>
     `,
-    body: html`
-      <!-- LANDING PAGE ONLY -->
-      <div id="app"></div>
+    js 
+ body: html`
+      <landing-page></landing-page>
     `
   })
 })
