@@ -8,7 +8,7 @@ import addSvg from "../../icons/gravity-ui/add.svg.js"
 import bellSvg from "../../icons/gravity-ui/bell.svg.js"
 import codeSvg from "../../icons/remix-icon/code.svg.js"
 import syncSvg from "../../icons/remix-icon/sync.svg.js"
-import {removeLoadingPageIndicator} from "../../main.js"
+
 import lockSvg from "../../icons/gravity-ui/lock.svg.js"
 import githubSvg from "../../icons/remix-icon/github.svg.js"
 import peopleSvg from "../../icons/gravity-ui/people.svg.js"
@@ -88,7 +88,7 @@ export class LandingPage extends LitElement {
 	connectedCallback() {
 		super.connectedCallback()
 		window.addEventListener("click", this.menuClick)
-		removeLoadingPageIndicator()
+		
 	}
 
 	disconnectedCallback() {
@@ -142,7 +142,7 @@ export class LandingPage extends LitElement {
 					<a @click=${() => this.scrollIntoElementView("coming-soon")} href="#coming-soon">Coming Soon</a>
 				</div>
 				<div class="nav">
-					<a class="try" href="#/editor">Try it out ${arrowRightSvg}</a>
+					<a class="try" href="#">Try it out ${arrowRightSvg}</a>
 				</div>
 			</nav>
 			
