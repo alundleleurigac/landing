@@ -54,8 +54,10 @@ export class HashRouter {
 			const { handler, params } = matchedRoute
 			this.render(handler, ...params)
 		} else if (currentPath.startsWith("editor")) {
-			this.render(() => html`404 Not Found`)
-		} else {
+	window.location.href = "https://YOUR-EXTERNAL-LINK.com"
+	return
+}
+ else {
 			this.render(this.routes["/"]) // Default to landing page
 		}
 	}
