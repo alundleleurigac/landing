@@ -23,7 +23,7 @@ export default template(async basic => {
       <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
 
       <!-- main entry -->
-      <script type="module" src="./main.js"></script>
+      <script type="module" src="./main.ts"></script>
     `,
     body: html`
       <!-- LANDING PAGE ONLY -->
